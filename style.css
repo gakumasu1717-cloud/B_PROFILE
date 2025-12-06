@@ -1,0 +1,1077 @@
+/* ═══════════════════════════════════════════════════════════════════
+   캐릭터 프로필 페이지 - 스타일시트
+   dojinprofile.github.io 스타일 참고
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────────
+   리셋 & 기본 스타일
+   ───────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #0a0a0a;
+    color: #e0e0e0;
+    line-height: 1.8;
+    overflow-x: hidden;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   CSS 변수
+   ───────────────────────────────────────────────────────────────────── */
+:root {
+    --primary-color: #b08968;
+    --primary-light: #d4a574;
+    --primary-dark: #8b6b4a;
+    --accent-color: #c9a87c;
+    --danger-color: #8b3a3a;
+    --bg-dark: #0a0a0a;
+    --bg-card: #151515;
+    --bg-card-hover: #1a1a1a;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --text-muted: #666;
+    --border-color: #2a2a2a;
+    --border-highlight: #3a3a3a;
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --shadow-strong: 0 10px 40px rgba(0, 0, 0, 0.5);
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   오디오 컨트롤
+   ───────────────────────────────────────────────────────────────────── */
+.audio-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: var(--transition-normal);
+    backdrop-filter: blur(10px);
+}
+
+.audio-control:hover {
+    background: rgba(176, 137, 104, 0.3);
+    border-color: var(--primary-color);
+}
+
+.audio-control.playing {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.audio-icon {
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   히어로 섹션
+   ───────────────────────────────────────────────────────────────────── */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #0a0a0a 0%, #151515 100%);
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-thumbnail {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary-color);
+    box-shadow: 
+        0 0 0 8px rgba(176, 137, 104, 0.2),
+        var(--shadow-strong);
+    margin-bottom: 30px;
+    transition: var(--transition-normal);
+}
+
+.hero-thumbnail:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 0 0 12px rgba(176, 137, 104, 0.3),
+        0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.hero-name {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.1em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero-tagline {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.2em;
+    margin-bottom: 40px;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 15px 50px;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.download-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    transition: var(--transition-normal);
+    z-index: -1;
+}
+
+.download-btn:hover {
+    color: var(--bg-dark);
+}
+
+.download-btn:hover::before {
+    left: 0;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+}
+
+.scroll-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid var(--text-muted);
+    border-bottom: 2px solid var(--text-muted);
+    transform: rotate(45deg);
+    margin: 15px auto 0;
+    animation: scrollBounce 2s infinite;
+}
+
+@keyframes scrollBounce {
+    0%, 20%, 50%, 80%, 100% { transform: rotate(45deg) translateY(0); }
+    40% { transform: rotate(45deg) translateY(10px); }
+    60% { transform: rotate(45deg) translateY(5px); }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   네비게이션
+   ───────────────────────────────────────────────────────────────────── */
+.nav {
+    position: sticky;
+    top: 0;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 100;
+    padding: 0 20px;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 15px 0;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    transition: var(--transition-fast);
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: var(--primary-color);
+    transition: var(--transition-normal);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.nav-link:hover::after {
+    width: 60%;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   메인 콘텐츠
+   ───────────────────────────────────────────────────────────────────── */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   섹션 공통
+   ───────────────────────────────────────────────────────────────────── */
+.section {
+    padding: 100px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 0.15em;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: var(--primary-color);
+    margin: 20px auto 0;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 50px;
+}
+
+.subsection-title {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.5rem;
+    color: var(--primary-light);
+    margin-bottom: 15px;
+    letter-spacing: 0.05em;
+}
+
+.description {
+    color: var(--text-secondary);
+    line-height: 2;
+    font-size: 1rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   프로필 섹션
+   ───────────────────────────────────────────────────────────────────── */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 50px;
+}
+
+.profile-image-wrapper {
+    position: relative;
+}
+
+.profile-image {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: var(--shadow-strong);
+    transition: var(--transition-normal);
+}
+
+.profile-image:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.info-table th,
+.info-table td {
+    padding: 15px 20px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.info-table th {
+    color: var(--primary-color);
+    font-weight: 500;
+    width: 100px;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+}
+
+.info-table td {
+    color: var(--text-primary);
+    background: var(--bg-card);
+    border-radius: 8px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   외형 섹션
+   ───────────────────────────────────────────────────────────────────── */
+.appearance-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.appearance-item.reverse {
+    direction: rtl;
+}
+
+.appearance-item.reverse > * {
+    direction: ltr;
+}
+
+.appearance-content {
+    padding: 20px;
+}
+
+.appearance-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-normal);
+}
+
+.appearance-image img:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-strong);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   배경 섹션 - 타임라인
+   ───────────────────────────────────────────────────────────────────── */
+.timeline {
+    position: relative;
+    margin-top: 50px;
+    padding-left: 50px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--primary-color) 0%, var(--border-color) 100%);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 60px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -38px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--bg-dark), 0 0 0 6px var(--primary-dark);
+}
+
+.timeline-content {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 10px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.timeline-image {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: var(--shadow-soft);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   특이사항 섹션
+   ───────────────────────────────────────────────────────────────────── */
+.traits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.trait-card {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition-normal);
+}
+
+.trait-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--primary-dark);
+    transform: translateY(-5px);
+}
+
+.trait-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.trait-title {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.3rem;
+    color: var(--primary-light);
+    margin-bottom: 10px;
+}
+
+.trait-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.trait-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   성격 섹션
+   ───────────────────────────────────────────────────────────────────── */
+.personality-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.personality-card {
+    background: var(--bg-card);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: var(--transition-normal);
+}
+
+.personality-card:hover {
+    border-color: var(--primary-dark);
+    transform: translateY(-5px);
+}
+
+.personality-card.danger {
+    border-color: var(--danger-color);
+}
+
+.personality-card.danger:hover {
+    border-color: #a84444;
+}
+
+.personality-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.personality-content {
+    padding: 25px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   말투 & 행동 섹션
+   ───────────────────────────────────────────────────────────────────── */
+.speech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.speech-item {
+    text-align: center;
+}
+
+.speech-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: var(--transition-normal);
+}
+
+.speech-image:hover {
+    transform: scale(1.05);
+}
+
+.speech-title {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.1rem;
+    color: var(--primary-light);
+    margin-bottom: 10px;
+}
+
+.speech-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   관계 형성 단계 섹션
+   ───────────────────────────────────────────────────────────────────── */
+.relationship-stages {
+    margin-top: 50px;
+}
+
+.stage {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 50px;
+    align-items: flex-start;
+}
+
+.stage-number {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--primary-color);
+    color: var(--bg-dark);
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.stage-content {
+    flex: 1;
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 10px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.stage-image {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.stage-title {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.4rem;
+    color: var(--primary-light);
+    margin-bottom: 15px;
+}
+
+.stage-desc {
+    color: var(--text-secondary);
+    line-height: 1.9;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   장면 섹션
+   ───────────────────────────────────────────────────────────────────── */
+.scene-card {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    margin-bottom: 60px;
+    background: var(--bg-card);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.scene-card.reverse {
+    grid-template-columns: 1.5fr 1fr;
+}
+
+.scene-card.reverse .scene-image {
+    order: 2;
+}
+
+.scene-image {
+    width: 100%;
+    height: 100%;
+    min-height: 350px;
+    object-fit: cover;
+}
+
+.scene-content {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.scene-title {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.6rem;
+    color: var(--primary-light);
+    margin-bottom: 20px;
+}
+
+.scene-text p {
+    color: var(--text-secondary);
+    line-height: 2;
+    margin-bottom: 20px;
+}
+
+.dialogue {
+    color: var(--text-primary);
+    font-style: italic;
+    padding: 20px 25px;
+    background: rgba(176, 137, 104, 0.1);
+    border-left: 3px solid var(--primary-color);
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   첫 만남 섹션
+   ───────────────────────────────────────────────────────────────────── */
+.first-meeting-content {
+    margin-top: 50px;
+}
+
+.first-meeting-image {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 0 auto 40px;
+    border-radius: 15px;
+    box-shadow: var(--shadow-strong);
+}
+
+.first-meeting-text {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.first-meeting-text p {
+    color: var(--text-secondary);
+    line-height: 2.2;
+    margin-bottom: 25px;
+    text-indent: 2em;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   갤러리 섹션
+   ───────────────────────────────────────────────────────────────────── */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 50px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    aspect-ratio: 1;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-normal);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px 10px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: var(--transition-normal);
+}
+
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   라이트박스
+   ───────────────────────────────────────────────────────────────────── */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-image {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.lightbox-caption {
+    color: var(--text-primary);
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.lightbox-close:hover {
+    color: var(--primary-color);
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--text-primary);
+    font-size: 2rem;
+    padding: 20px 15px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: rgba(176, 137, 104, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   푸터
+   ───────────────────────────────────────────────────────────────────── */
+.footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   맨 위로 버튼
+   ───────────────────────────────────────────────────────────────────── */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    color: var(--bg-dark);
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-normal);
+    z-index: 1000;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: var(--primary-light);
+    transform: translateY(-5px);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   반응형 디자인
+   ───────────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .appearance-item,
+    .appearance-item.reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+    }
+    
+    .scene-card,
+    .scene-card.reverse {
+        grid-template-columns: 1fr;
+    }
+    
+    .scene-card.reverse .scene-image {
+        order: 0;
+    }
+    
+    .scene-image {
+        min-height: 300px;
+    }
+    
+    .speech-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-name {
+        font-size: 2.5rem;
+    }
+    
+    .hero-thumbnail {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .section {
+        padding: 60px 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .nav-container {
+        gap: 5px;
+    }
+    
+    .nav-link {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .traits-grid,
+    .personality-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .speech-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stage {
+        flex-direction: column;
+    }
+    
+    .stage-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .timeline {
+        padding-left: 40px;
+    }
+    
+    .timeline::before {
+        left: 15px;
+    }
+    
+    .timeline-marker {
+        left: -33px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-name {
+        font-size: 2rem;
+    }
+    
+    .hero-thumbnail {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .download-btn {
+        padding: 12px 35px;
+        font-size: 0.9rem;
+    }
+    
+    .section-title {
+        font-size: 1.7rem;
+    }
+    
+    .audio-control {
+        width: 40px;
+        height: 40px;
+        top: 15px;
+        right: 15px;
+    }
+    
+    .audio-icon {
+        font-size: 18px;
+    }
+    
+    .lightbox-prev,
+    .lightbox-next {
+        padding: 15px 10px;
+        font-size: 1.5rem;
+    }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   애니메이션
+   ───────────────────────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+/* 스크롤 시 나타나는 요소들 */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
