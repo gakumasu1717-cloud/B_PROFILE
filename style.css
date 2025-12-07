@@ -848,6 +848,11 @@ body {
     color: var(--gray-lighter);
     font-size: 0.9rem;
     line-height: 1.9;
+    margin-bottom: 8px;
+}
+
+.inner-monologue p:last-child {
+    margin-bottom: 0;
 }
 
 .dialogue-box {
@@ -861,11 +866,107 @@ body {
     color: var(--white);
     font-size: 0.95rem;
     line-height: 1.8;
+    margin-bottom: 8px;
+}
+
+.dialogue-box p:last-child {
+    margin-bottom: 0;
 }
 
 .dialogue-box.final-dialogue {
     border-left-color: var(--emotion-danger);
     background: rgba(106, 44, 44, 0.1);
+}
+
+/* 장면 대화 스타일 */
+.scene-dialogue {
+    margin-top: 25px;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 2px solid var(--accent-dark);
+}
+
+.scene-dialogue p {
+    color: var(--gray-lighter);
+    font-size: 0.9rem;
+    line-height: 2;
+    margin-bottom: 12px;
+}
+
+.scene-dialogue p:last-child {
+    margin-bottom: 0;
+}
+
+.scene-dialogue em {
+    color: var(--gray);
+    font-style: italic;
+}
+
+.scene-dialogue strong {
+    color: var(--white);
+    font-weight: 500;
+}
+
+/* 단계 설명 박스 */
+.stage-description {
+    padding: 20px;
+    background: rgba(74, 111, 165, 0.03);
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.stage-description p {
+    color: var(--gray-lighter);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+/* 성적 특성 섹션 */
+.sexual-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.sexual-item {
+    background: var(--bg-card);
+    padding: 30px;
+    border: 1px solid var(--border-color);
+}
+
+.sexual-item h3 {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1rem;
+    color: var(--white);
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sexual-item p {
+    color: var(--gray-lighter);
+    font-size: 0.9rem;
+    line-height: 1.9;
+    margin-bottom: 10px;
+}
+
+.sexual-item p:last-child {
+    margin-bottom: 0;
+}
+
+.sexual-note {
+    margin-top: 40px;
+    padding: 30px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.sexual-note p {
+    color: var(--gray);
+    font-size: 0.85rem;
+    font-style: italic;
+    line-height: 1.9;
 }
 
 .stage-note {
@@ -946,6 +1047,25 @@ body {
     font-size: 0.95rem;
     line-height: 2;
     margin-bottom: 15px;
+}
+
+.scene-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* 장면 무드/요약 */
+.scene-mood {
+    margin-top: 20px;
+    padding: 15px 20px;
+    background: rgba(74, 111, 165, 0.05);
+    border-left: 2px solid var(--accent-dark);
+}
+
+.scene-mood p {
+    color: var(--accent-light);
+    font-size: 0.85rem;
+    font-style: italic;
+    line-height: 1.7;
 }
 
 /* ─────────────────────────────────────────────────────────────────────
@@ -1159,6 +1279,10 @@ body {
     }
     
     .reputation-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sexual-grid {
         grid-template-columns: 1fr;
     }
 }
